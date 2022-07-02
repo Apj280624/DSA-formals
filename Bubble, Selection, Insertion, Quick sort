@@ -27,7 +27,8 @@ void my_swap(int& x,int& y) {
 /////////////////// bubble, selection and insertion sort //////////////////
 
 /*
-by apna college: https://www.youtube.com/watch?v=PkJIc5tBRUE
+all three by apna college: https://www.youtube.com/watch?v=PkJIc5tBRUE
+microsoft vali didi
 
 bubble sort
 name comes from the fact the bubbles in water reach the top, similarily here we push the heavier elements to the right
@@ -40,26 +41,68 @@ as heavier elements reach to the last array size decreases by one
 in the first iteration the heaviest element gets pushed to last index and array on which we need to operate decrease by one 
 in the second iteration the second heaviest element get pushed to the second last index and array on which we need to operate decrease by one 
 
-time = o(n^2)
+worst, best and avg case time = o(n^2)
 space = o(1)
+best case => array is already sorted, if we optimize then best case time = o(n) when array is fully sorted, optimization is done by using swapped flag, if we remove that optimization is removed
+worst case => array is sorted in descending order
+stable: yes => consider a case with two elements with value at 8 at indices
+3 and 6, the 8 present at index 3 wont ever cross 8 present at index 6 because
+the if condition doesnot have any equality sign
 
-selection sort
-
-array is divided into two areas sorted and unsorted, unsorted region starts with i, every time find the index of minimum element from the the unsorted area and put it at the last of sorted area by swapping
-
-so we need n-1 iterations
-
-time = o(n^2)
-space = o(1)
+////////////////////////////////////////////////////////////////////////
 
 insertion sort
 
 array is divided into two regions sorted and unsorted, unsorted region starts from i, traverse from left to right, we need to insert the first element of
 unsorted region at its correct index by shifting the sorted array towards right (not by swapping even though it could give the same result)
 
+time same as bubble sort for all cases, also the best case and worst case scenarios are same, we dont need to make any optimization for the best case because in the best case there will be no shifting possible so only outer loop runs
 
-******************** COMPARITIVE STUDY *******************************************************
-https://www.geeksforgeeks.org/analysis-of-different-sorting-techniques/
+in all cases other than the best case, both the loop runs till their bounds
+even though swapping occurs or not
+only the best case the outer loop runs once so time = o(n)
+
+stable: yes => consider a case with two elements with value at 2 at indices
+4 and 5, and  elements to the left are greater than 2, then the 2 present at index 4 will react to the first position and the one at 5 will react at the
+second position from left and wont cross the other element with value 2
+
+bubble sort and insertion sort use consecutive swapping or shifting that's why
+they are stable
+
+//////////////////////////////////////////////////////////////////
+ 
+selection sort
+
+array is divided into two areas sorted and unsorted, unsorted region starts with i, every time find the index of minimum element from the the unsorted area and put it at last of sorted area by swapping
+
+so we need n-1 iterations
+
+Best, average and worst case time complexity: n^2 which is independent of distribution of data. 
+space = o(1)
+
+stable: no => because here we are swapping distant elements unlike bubble and insertion sort
+
+//////////////////////////////////////////////////////////////////////
+
+Merge sort – 
+Best, average and worst case time complexity: nlogn which is independent of distribution of data. 
+stable: yes => it could be made stable, rearrangement of elements takes place while merging so we need to make chngs there, while we put the elements into
+the big array, we select the minmum b/n the two there we have
+
+so if(a[i]<=b[j]) {
+    i think that :here we must use equality sign also, so that even if two  elements are equal
+    a[i] goes first because a[i] was left to b[j] because 'a' array is left to b
+    that's it
+} else {
+    
+}
+ 
+
+Several common sorting algorithms are stable by nature, such as Merge Sort, Timsort, Counting Sort, Insertion Sort, and Bubble Sort. Others such as Quicksort, Heapsort and Selection Sort are unstable.
+
+
+bubble, insertion, count, merge sort -> stable
+selection, quick sort -> unstable
 
 */
 
@@ -70,12 +113,19 @@ void bubble_sort(vector<int>& v) {
     int n = v.size();
     
     for(int i = 0; i < n-1; i++) {
+        bool swapped = false;
+        
         for(int j = 1; j < n-i; j++) {
             if(v[j-1] > v[j]) {
                 // v[i] needs to go back
-                // swap(v[j-1], v[j]);
                 my_swap(v[j-1], v[j]);
+                swapped = true;
             }
+        }
+        
+        if(!swapped) {
+            // array has been sorted
+            break;
         }
     }
 }
@@ -127,7 +177,9 @@ void insertion_sort(vector<int>& v) {
 apna college youtube vdo:
 https://www.youtube.com/watch?v=Dl6HT-NM_q4
 
-divide and conquer algo
+placement course
+
+divide and conquer recursive algo
 
 algo:
 choose a pivot(same for always) here we choose last element always 
@@ -151,18 +203,18 @@ code by sumit sir increments i inside the while loop body
 
 best and avg case time comp = o(nlogn)
 
-worst case time comp = o(n^2), this occurs when the given array is already asc or desc sorted, and the pivot is always the smallest of largest element
+worst case time comp = o(n^2), this occurs when the given array is already asc or desc sorted, and the pivot is always the smallest or largest element
 
 consider a case when given array is already sorted and pivot is the last element ie the largest one, in such case when we partition all the n-1 elements other than the last element will go in one partition and we will apply quick sort on an array of n-1 size, so we were just able to remove one element after partioning
 
-best cases include when partitioning happens such that the array gets divided into two equal sized arrays like in merge sort
+best and avg cases include when partitioning happens such that the array gets divided into two equal sized arrays like in merge sort
 
 Though the worst-case complexity of quicksort is more than other sorting algorithms such as Merge sort and Heap sort, still it is faster in practice. Worst case in quick sort rarely occurs because by changing the choice of pivot, it can be implemented in different ways. Worst case in quicksort can be avoided by choosing the right pivot element.
 
 https://www.javatpoint.com/quick-sort#:~:text=Time%20Complexity,-Case&text=The%20average%20case%20time%20complexity,O(n*logn).
 
 Space Complexity	O(n*logn)
-Stable : NO
+stable: no => because here we are swapping distant elements unlike bubble and insertion sort
 
 */
 
@@ -202,7 +254,13 @@ void print(vector<int>& v) {
 }
 
 vector<int> getArray() {
-    return {7,8,3,1,2};
+    vector<int> v = {1,2,3,4,5};
+    
+    // reverse(v.begin(),v.end());
+    
+    v = {7,8,3,1,2};
+    
+    return v;
 }
 
 void solve()
@@ -216,7 +274,7 @@ void solve()
     
     v = getArray(); insertion_sort(v); print(v);
     
-    v= getArray(); quick_sort(v, 0, n-1); print(v);
+    v = getArray(); quick_sort(v, 0, n-1); print(v);
     
 
     return;
