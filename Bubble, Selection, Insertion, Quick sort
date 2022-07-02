@@ -1,0 +1,233 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fastio()                      \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define lli long long int
+#define ll long long
+#define pii pair<int,int>
+#define vi vector<int>
+#define vvi vector<vi>
+#define vl vector<ll>
+#define vvl vector<vl> 
+
+
+void my_swap(int& x,int& y) {
+    if(&x == &y) {
+        return; // this is imp if both x and y are references to the same var
+    }
+    
+    x = x^y;
+    y = x^y;
+    x = x^y;
+}
+
+
+/////////////////// bubble, selection and insertion sort //////////////////
+
+/*
+by apna college: https://www.youtube.com/watch?v=PkJIc5tBRUE
+
+bubble sort
+name comes from the fact the bubbles in water reach the top, similarily here we push the heavier elements to the right
+
+for n-1 times
+traverse from left to right, repeatedly swap consecutive elements so that the
+heaviest element in the current array moves to the last of the current array
+as heavier elements reach to the last array size decreases by one
+
+in the first iteration the heaviest element gets pushed to last index and array on which we need to operate decrease by one 
+in the second iteration the second heaviest element get pushed to the second last index and array on which we need to operate decrease by one 
+
+time = o(n^2)
+space = o(1)
+
+selection sort
+
+array is divided into two areas sorted and unsorted, unsorted region starts with i, every time find the index of minimum element from the the unsorted area and put it at the last of sorted area by swapping
+
+so we need n-1 iterations
+
+time = o(n^2)
+space = o(1)
+
+insertion sort
+
+array is divided into two regions sorted and unsorted, unsorted region starts from i, traverse from left to right, we need to insert the first element of
+unsorted region at its correct index by shifting the sorted array towards right (not by swapping even though it could give the same result)
+
+
+******************** COMPARITIVE STUDY *******************************************************
+https://www.geeksforgeeks.org/analysis-of-different-sorting-techniques/
+
+*/
+
+//////////////////////////// bubble sort /////////////////////////////////
+
+
+void bubble_sort(vector<int>& v) {
+    int n = v.size();
+    
+    for(int i = 0; i < n-1; i++) {
+        for(int j = 1; j < n-i; j++) {
+            if(v[j-1] > v[j]) {
+                // v[i] needs to go back
+                // swap(v[j-1], v[j]);
+                my_swap(v[j-1], v[j]);
+            }
+        }
+    }
+}
+
+//////////////////////////// selection sort /////////////////////////////////
+
+void selection_sort(vector<int>& v) {
+    int n = v.size();
+    
+    // i marks the start of unsorted region
+    for(int i=0; i < n-1 ; i++) {
+        int sm_idx = i; // idx of smallest element in the unsorted region
+        
+        for(int j = i+1; j < n ; j++) {
+            if(v[j] < v[sm_idx]) {
+                sm_idx = j;
+            }
+        }
+        
+        my_swap(v[i], v[sm_idx]);
+    }
+}
+
+//////////////////////////// insertion sort /////////////////////////////////
+
+void insertion_sort(vector<int>& v) {
+    int n = v.size();
+    
+    // i marks the start of unsorted region
+    for(int i = 1; i < n; i++) {
+        int who = v[i];
+        int j = i-1;
+    
+        while(j >= 0 && v[j] > who) {
+            v[j+1] = v[j];
+            j--;
+        }
+        
+        j++;
+        v[j] = who;
+    }
+}
+
+
+//////////////////////////// quick sort /////////////////////////////////
+
+/*
+
+apna college youtube vdo:
+https://www.youtube.com/watch?v=Dl6HT-NM_q4
+
+divide and conquer algo
+
+algo:
+choose a pivot(same for always) here we choose last element always 
+partition the array around the pivot, ie all smaller elements on the left of pivot and all larger elements to the right of pivot
+now recursively sort the left and right regions of pivot
+
+algorithm for partition is important to look
+
+i haven't used the partitioning algo from apna college
+i have used the algo used for the standard problem from the pepcoding youtube video:
+https://www.youtube.com/watch?v=if40LxQ8_Xo 
+
+algo: 
+
+i to n-1 => unknown region or the region on which we are operating 
+j to i-1 => elements greater than pivot
+0 to j-1 => elements lesser than pivot
+
+here i is being incremented inside the for loop
+code by sumit sir increments i inside the while loop body
+
+best and avg case time comp = o(nlogn)
+
+worst case time comp = o(n^2), this occurs when the given array is already asc or desc sorted, and the pivot is always the smallest of largest element
+
+consider a case when given array is already sorted and pivot is the last element ie the largest one, in such case when we partition all the n-1 elements other than the last element will go in one partition and we will apply quick sort on an array of n-1 size, so we were just able to remove one element after partioning
+
+best cases include when partitioning happens such that the array gets divided into two equal sized arrays like in merge sort
+
+Though the worst-case complexity of quicksort is more than other sorting algorithms such as Merge sort and Heap sort, still it is faster in practice. Worst case in quick sort rarely occurs because by changing the choice of pivot, it can be implemented in different ways. Worst case in quicksort can be avoided by choosing the right pivot element.
+
+https://www.javatpoint.com/quick-sort#:~:text=Time%20Complexity,-Case&text=The%20average%20case%20time%20complexity,O(n*logn).
+
+Space Complexity	O(n*logn)
+Stable : NO
+
+*/
+
+int partition(vector<int>& v, int l, int r) {
+    int n = v.size(), pvt = v[r];
+    
+    int j = 0;
+    for(int i=0; i<n ; i++) {
+        if(v[i] <= pvt) {
+            my_swap(v[i], v[j]);
+            j++;
+        }
+    }
+    
+    return j-1; // assuming there's a pvt element for sure
+}
+
+void quick_sort(vector<int>& v, int l, int r) {
+    if(l >= r) {
+        return;
+    }
+    
+    int pvt_idx = partition(v, l, r);
+    
+    quick_sort(v, l, pvt_idx-1);
+    quick_sort(v, pvt_idx+1, r);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void print(vector<int>& v) {
+    for(auto x: v) {
+        cout << x << " ";
+    }
+    
+    cout<<'\n';
+}
+
+vector<int> getArray() {
+    return {7,8,3,1,2};
+}
+
+void solve()
+{
+    int n=5;
+    vector<int> v = getArray();
+    
+    v = getArray(); bubble_sort(v); print(v);
+    
+    v = getArray(); selection_sort(v); print(v);
+    
+    v = getArray(); insertion_sort(v); print(v);
+    
+    v= getArray(); quick_sort(v, 0, n-1); print(v);
+    
+
+    return;
+}
+
+int main()
+{
+    fastio();
+    int t=1;
+    // cin>>t;
+    while(t--) solve();
+
+    return 0;
+}
