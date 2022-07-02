@@ -104,6 +104,9 @@ Several common sorting algorithms are stable by nature, such as Merge Sort, Tims
 bubble, insertion, count, merge sort -> stable
 selection, quick sort -> unstable
 
+comparision based: bubble, insertion, selection, merge sort
+non comparision based: radix, count sort
+
 */
 
 //////////////////////////// bubble sort /////////////////////////////////
