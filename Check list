@@ -42,6 +42,8 @@ machine coding round (Ansh Sir said round 1 in youtube vdo) - search machine cod
 
 
 project -------------------------------------------------------------------------
+production Js: https://frontendmasters.com/guides/javascript-enlightenment/
+
 
 how does nodemailer and axios work
 understanding import and export
@@ -52,4 +54,5 @@ callbacks, promises, async await
 functions
 event loop
 web apis
+event listeners, you might get something interesting
 
