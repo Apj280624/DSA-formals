@@ -48,3 +48,7 @@ understanding import and export
 how axios works: does it make req in xml or json
 read it docs not npm or github but here: https://axios-http.com/docs/intro
 also read about xmlhttprequests
+callbacks, promises, async await
+functions
+event loop
+
