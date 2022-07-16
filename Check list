@@ -55,4 +55,5 @@ functions
 event loop
 web apis
 event listeners, you might get something interesting
+object constructor, function constructor
 
