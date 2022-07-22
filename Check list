@@ -59,4 +59,4 @@ object constructor, function constructor
 AJAX programming
 this keyword
 call, apply, bind
-event bubbling
+event bubbling and capturing
