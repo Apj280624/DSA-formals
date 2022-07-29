@@ -2,3 +2,4 @@ Graph Algorithms:
 Shortest Routes I - Dijkstra (efficient)
 Shortest Routes II - Floyd Warshall
 High Score - Bellman Ford + Extension
+Road Reparation - Minimum spanning tree
