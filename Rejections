@@ -1,1 +1,32 @@
+Quantiphi:
+Could not solve one coding problem because I had only 15 mins left to solve it. So I thought of solving mcqs rather. 
+But they selected some student based on ML background or sectional performance or two coding problems but not on overall test performance.
 
+Josh soft:
+In first coding test:
+there server created the problem: I solved the first which was very easy but when i submitted it, it showed server error and when
+i tried to submit it multiple times because of server error it showed submission limit exceeded
+in the second problem, which was the coin change problem, the student who submitted the greedy solution got AC but I submitted the correct DP solution and got WA
+there testing code must be wrong
+third problem was wrong too i think, but i could not submit this one too
+retest was taken:
+I solved all three in 30 mins, but they fulfilled their requirement from the first test itself and a lot of students like me who solved all the prblms were not 
+shortlisted
+in the first test 50 shortlisted, in the retest only 5 shortlisted, somebody told me the 2nd shortlist was based on cgpa
+
+deqode:
+written test: i solved both of the questions(a lot of students did): ques were one easy and one medium(variation of generate all partitions of a string)
+but some how not shortlisted in those 30
+
+infosys:
+tough exam:
+clueless about first que based on mathematical expectations topic
+2nd one's some part wanted me to write a better implementation of longest pallindromic substring than the DP, has to used manacher's algo saw william lin's solution
+still 2nd did not pass
+3rd one i though i wrote the optimal solution and though it was correct during the whole test, due to being sure of its correctness i wasted all my time in it
+later submitted a non optimal solution and some test cases passed. later i realized at home that the optimal solution was wrong and i could have used that time
+to debug the 2nd que
+
+sap: 
+even though i did not want to get selected but i got rejected
+solved 2 coding ques, but c++ and java mcqs might have been wrong
