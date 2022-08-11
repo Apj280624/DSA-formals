@@ -10,7 +10,9 @@ DBMS:
 
 2
 Then he asked me about DBMS in extreme depth.
-Asked me to design a database to depict referential integrity. We had a detailed discussion on the same. Then he asked me to normalize the database designed
+Asked me to design a database to depict referential integrity. 
+FK constraint in sql
+We had a detailed discussion on the same. Then he asked me to normalize the database designed
 How will you implement indexing on the database you designed, Followed by types of indexing?
 What is the singleton pattern and why do we use it?
 
