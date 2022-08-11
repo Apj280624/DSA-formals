@@ -4,3 +4,59 @@ Sorting algos
 Types of Binary trees
 Time complexity notations
 STL basics
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+DBMS:
+
+2
+Then he asked me about DBMS in extreme depth.
+Asked me to design a database to depict referential integrity. We had a detailed discussion on the same. Then he asked me to normalize the database designed
+How will you implement indexing on the database you designed, Followed by types of indexing?
+What is the singleton pattern and why do we use it?
+
+ They were emphasizing the database the most. we
+
+Difference between primary key and Unique key with its examples in the given database.
+Made me design a database for the management system with 2 tables. Had an in-depth discussion on it applying normalization.
+He asked for 3 complex queries based on that database.
+
+Difference between MongoDB and SQL
+
+a practical example of private and public inheritance
+Does polymorphism also exist in c? yes, printf, scanf etc.
+
+3
+
+Explain Normalization and first, second, and third normal form in 2-3 minutes
+Do you know about joins? Which joins do you know about?
+You have a department table with 3 rows with 1,2,3 dept id and an employee table with 40 rows which has 20 rows for 1,2 id each
+select * from dept left outer join emp where dept.id== emp.id;
+What does the above query return?
+How many rows does the output have?
+The difference between deleting and truncating
+Do you know about transactions? Tell about ACID properties of transactions.
+Difference between DML, DDL, and DCL
+
+4
+
+Few simple SQL queries and 1-2 based on joins
+Asked about SQL Query, ACID Property, Concurrency Control Protocols. (All in-depth )
+How to represent many many relationships within the tables.
+
+5
+
+Difference between CPP and JAVA.
+Now he comes to DBMS, what is Distributed System
+What type of architecture you used in your project?
+He asked me to write query to find a record who has 2nd highest salary (this question is trending now a days, so please learn about this there are three ways)
+
+
+7
+
+Then they asked if I knew DBMS. They asked some basic questions about DDL and DML commands. Which command is used in which conditions? Examples of DDL and DML commands.
+http requests
+
+8
+
+One DSA Problem on Linked List: a small Twist in “Detect loop in a list” and I coded the same.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
