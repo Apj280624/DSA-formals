@@ -30,28 +30,37 @@ void my_swap(int& x,int& y) {
 all three by apna college: https://www.youtube.com/watch?v=PkJIc5tBRUE
 microsoft vali didi
 
-bubble sort
+bubble sort:
 name comes from the fact the bubbles in water reach the top, similarily here we push the heavier elements to the right
 
 algo:
-for n-1 times
+for n-1 phases:
 traverse from left to right, starting from the first one, repeatedly swap consecutive elements (left,right)
-when left element is greater than the right one
+if left element is greater than the right one
+so, the heaviest element in the current array moves to the last of the current array
+as heavier elements reach to the last array size decreases by one after each phase
 
-so that the
-heaviest element in the current array moves to the last of the current array
-as heavier elements reach to the last array size decreases by one
+optimization:
+if at any phase there was no swapping done, then we can stop here itself and we don't need to execute other phases
+we can use a flag here
 
-in the first iteration the heaviest element gets pushed to last index and array on which we need to operate decrease by one 
-in the second iteration the second heaviest element get pushed to the second last index and array on which we need to operate decrease by one 
+why it works:
+in the first phase the heaviest element gets pushed to last index and array on which we need to operate decrease by one 
+in the second phase the second heaviest element get pushed to the second last index and array on which we need to operate 
+decrease by one. we need only n-1 phases, because if we put n-1 elements at their correct places remaining element
+already comes at its correct place
 
-worst, best and avg case time = o(n^2)
+time complexity and stability: 
+worst, avg case time = o(n^2)
+best case time = o(n)
 space = o(1)
-best case => array is already sorted, if we optimize then best case time = o(n) when array is fully sorted, optimization is done by using swapped flag, if we remove that optimization is removed
+best case => array is already sorted, if we optimize then best case time = o(n) when array is fully sorted, 
+optimization is done by using swapped flag, if we remove that optimization is removed
 worst case => array is sorted in descending order
-stable: yes => consider a case with two elements with value at 8 at indices
-3 and 6, the 8 present at index 3 wont ever cross 8 present at index 6 because
-the if condition doesnot have any equality sign
+stable = yes => 
+when we talk about it stability, its about relative position of equal elements 
+consider a case with two elements with value at 8 at indices 3 and 6, the 8 present at index 3 wont ever cross 8 
+present at index 6 because the if condition doesnot have any equality sign
 
 ////////////////////////////////////////////////////////////////////////
 
