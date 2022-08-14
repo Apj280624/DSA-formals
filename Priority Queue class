@@ -1,0 +1,154 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fastio()                      \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define lli long long int
+#define ll long long
+#define pii pair<int,int>
+#define vi vector<int>
+#define vvi vector<vi>
+#define vl vector<ll>
+#define vvl vector<vl> 
+
+class PQ {
+    int sz, max_sz;
+    vector<int> max_heap;
+    
+    public:
+    PQ(int max_sz) {
+        sz = 0;
+        this->max_sz = max_sz;
+    }
+    
+    bool isFull() {
+        return sz == max_sz;
+    }
+    
+    bool isEmpty() {
+        return sz == 0;
+    }
+    
+    void handleFull() {
+        cout<<"Max heap is full"<<'\n';
+    }
+    
+    void handleEmpty() {
+        cout<<"Max heap is empty"<<'\n';
+    }
+    
+    int top() {
+        if(isEmpty()) {
+            handleEmpty();
+            return -1;
+        }
+        
+        return max_heap[0];
+    }
+    
+    int size() {
+        return sz;
+    }
+    
+    void display() {
+        if(!isEmpty()) {
+            for(auto x: max_heap) {
+                cout<<x<<" ";
+            }
+            
+            cout<<'\n';
+            
+            return;
+        }
+        
+        handleEmpty();
+    }
+    
+    void mhai(int idx) {
+        while(idx > 0 && max_heap[(idx-1)/2] < max_heap[idx]) {
+            swap(max_heap[idx], max_heap[(idx-1)/2]);
+            idx = (idx-1)/2;
+        }
+    }
+    
+    void push(int x) {
+        if(isFull()) {
+            handleFull();
+            return;
+        }
+        
+        max_heap.push_back(x);
+        sz++;
+        
+        mhai(sz-1);
+        
+        this->display();
+    }
+    
+    void mhad(int idx) {
+        while(idx < sz && ((2*idx+1) < sz || (2*idx+2) < sz)) {
+            int lar_idx = idx;
+            if((2*idx + 1) < sz && max_heap[2*idx+1] > max_heap[lar_idx]) {
+                lar_idx = 2*idx+1;
+            }
+            
+            if((2*idx+2) < sz && max_heap[2*idx+2] > max_heap[lar_idx]) {
+                lar_idx = 2*idx+2;
+            }
+            
+            if(lar_idx == idx) {
+                break;
+            }
+            
+            swap(max_heap[idx], max_heap[lar_idx]);
+            idx = lar_idx;
+        }
+    }
+    
+    void pop() {
+        if(isEmpty()) {
+            handleEmpty();
+            return;
+        }
+        
+        swap(max_heap[0], max_heap[sz-1]);
+        max_heap.pop_back();
+        sz--;
+        
+        mhad(0);
+        
+        this->display();
+    }
+};
+
+void solve()
+{
+    PQ pq(6);
+    pq.push(10);
+    pq.push(20);
+    pq.push(30);
+    pq.push(40);
+    pq.push(50);
+    
+    // cout<<pq.top()<<'\n';
+    
+    pq.pop();
+    pq.pop();
+    pq.pop();
+    pq.pop();
+    
+    // cout<<pq.top()<<'\n';
+    
+    return;
+}
+
+int main()
+{
+    fastio();
+    int t=1;
+    // cin>>t;
+    while(t--) solve();
+
+    return 0;
+}
