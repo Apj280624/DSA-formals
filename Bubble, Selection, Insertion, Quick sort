@@ -33,8 +33,12 @@ microsoft vali didi
 bubble sort
 name comes from the fact the bubbles in water reach the top, similarily here we push the heavier elements to the right
 
+algo:
 for n-1 times
-traverse from left to right, repeatedly swap consecutive elements so that the
+traverse from left to right, starting from the first one, repeatedly swap consecutive elements (left,right)
+when left element is greater than the right one
+
+so that the
 heaviest element in the current array moves to the last of the current array
 as heavier elements reach to the last array size decreases by one
 
