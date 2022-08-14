@@ -358,8 +358,8 @@ stable: no => because here we are swapping distant elements unlike bubble and in
 int partition(vector<int>& v, int l, int r) {
     int n = v.size(), pvt = v[r];
     
-    int j = 0;
-    for(int i=0; i<n ; i++) {
+    int j = l;
+    for(int i=l; i<=r; i++) {
         if(v[i] <= pvt) {
             my_swap(v[i], v[j]);
             j++;
@@ -391,7 +391,7 @@ void print(vector<int>& v) {
 vector<int> getArray() {
     vector<int> v = {1,2,3,4,5};
     
-    v = {7,8,3,1,2,11,1};
+    v = {7,8,8,4,3,1,2,4,11,1};
     
     return v;
 }
