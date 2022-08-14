@@ -68,7 +68,7 @@ INSERTION SORT:
 
 algo:
 array is divided into two regions sorted and unsorted, initially whole array is unsorted, unsorted region starts from i, 
-we traverse from left to right, we need to insert the first element of current unsorted region (ie at the element at index i) 
+we traverse from left to right, we need to 'insert' the first element of current unsorted region (ie at the element at index i) 
 at its correct index by right-shifting the elements of sorted array one by one if they are larger 
 (not by swapping even though it could give the same result)
 
@@ -96,16 +96,24 @@ bubble sort and insertion sort use consecutive swapping or shifting that's why t
 
 //////////////////////////////////////////////////////////////////
  
-selection sort
+SELECTION SORT:
 
-array is divided into two areas sorted and unsorted, unsorted region starts with i, every time find the index of minimum element from the the unsorted area and put it at last of sorted area by swapping
+algo:
+array is divided into two regions sorted and unsorted, initially whole array is unsorted, unsorted region starts from i,
+each time 'select' the index of minimum element from the the unsorted region and put it at last of sorted region by swapping
 
-so we need n-1 iterations
+this works some what exactly opposite to bubble sort in results of each but implementation is different
+in the first iteration, first minimum element comes to the 0th index
+in the second iteration, second minimum element comes to the 1st index and so on
 
-Best, average and worst case time complexity: n^2 which is independent of distribution of data. 
+time complexity and stability: 
+best, worst and avg case time = o(n^2), which is independent of the distribution of data
+best case time = o(n)
 space = o(1)
 
 stable: no => because here we are swapping distant elements unlike bubble and insertion sort
+example: 1 3 3 2 2, and i = 1, we find the index of the minimum element = 2 (element = 2)
+we swap it with 3 at index 1, so the 3 at index 1 crosses the 3 at index 2
 
 //////////////////////////////////////////////////////////////////////
 
