@@ -30,7 +30,7 @@ void my_swap(int& x,int& y) {
 all three by apna college: https://www.youtube.com/watch?v=PkJIc5tBRUE
 microsoft vali didi
 
-bubble sort:
+BUBBLE SORT:
 name comes from the fact the bubbles in water reach the top, similarily here we push the heavier elements to the right
 
 algo:
@@ -64,23 +64,36 @@ present at index 6 because the if condition doesnot have any equality sign
 
 ////////////////////////////////////////////////////////////////////////
 
-insertion sort
+INSERTION SORT:
 
-array is divided into two regions sorted and unsorted, unsorted region starts from i, traverse from left to right, we need to insert the first element of
-unsorted region at its correct index by shifting the sorted array towards right (not by swapping even though it could give the same result)
+algo:
+array is divided into two regions sorted and unsorted, initially whole array is unsorted, unsorted region starts from i, 
+we traverse from left to right, we need to insert the first element of current unsorted region (ie at the element at index i) 
+at its correct index by right-shifting the elements of sorted array one by one if they are larger 
+(not by swapping even though it could give the same result)
 
-time same as bubble sort for all cases, also the best case and worst case scenarios are same, we dont need to make any optimization for the best case because in the best case there will be no shifting possible so only outer loop runs
+optimization:
+no optimization needed, inner loop will only work if we have larger elements in left of index i
 
-in all cases other than the best case, both the loop runs till their bounds
-even though swapping occurs or not
+time complexity and stability: (best case and worst case scenarios and time complexity same as bubble sort)
+
+worst, avg case time = o(n^2)
+best case time = o(n)
+space = o(1)
+best case => array is already sorted, in best case inner loop doesnot work at all
+worst case => array is sorted in descending order
+stable = yes => 
+when we talk about it stability, its about relative position of equal elements 
+consider a case with two elements with value 2 at indices 4 and 5, and elements to the left of index 4 are greater than 2, 
+then the 2 present at index 4 will reach to the first position and the one at 5 will react at the
+second position from left and the 2 which was originally present at index 5 will never cross the one originally present
+at index 4
+
+extra:
+in all cases other than the best case, both the loop runs till their bounds even though swapping occurs or not
 only the best case the outer loop runs once so time = o(n)
 
-stable: yes => consider a case with two elements with value at 2 at indices
-4 and 5, and  elements to the left are greater than 2, then the 2 present at index 4 will react to the first position and the one at 5 will react at the
-second position from left and wont cross the other element with value 2
-
-bubble sort and insertion sort use consecutive swapping or shifting that's why
-they are stable
+bubble sort and insertion sort use consecutive swapping or shifting that's why they are stable
 
 //////////////////////////////////////////////////////////////////
  
