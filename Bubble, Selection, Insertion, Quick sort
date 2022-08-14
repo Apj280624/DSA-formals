@@ -7,11 +7,30 @@ using namespace std;
 #define lli long long int
 #define ll long long
 #define pii pair<int,int>
+#define pll pair<ll,ll>
+#define tpiii tuple<int,int,int>
+#define tplll tuple<ll,ll,ll>
+// DS
 #define vi vector<int>
-#define vvi vector<vi>
+#define vb vector<bool>
 #define vl vector<ll>
+#define vvi vector<vi>
 #define vvl vector<vl> 
-
+#define umap unordered_map
+#define uset unordered_set
+#define mset multiset
+// Utilities
+#define ff first
+#define ss second
+#define bg begin()
+#define ed end()
+#define pb push_back
+#define ppb pop_back
+ll mod1=1e9+7;
+ll mod2=1e9+7;
+// Functions
+ll mod_add(ll x,ll y,ll m) { return ((x%m)+(y%m))%m; }
+ll mod_mul(ll x,ll y,ll m) { return ((x%m)*(y%m))%m; }
 
 void my_swap(int& x,int& y) {
     if(&x == &y) {
@@ -115,12 +134,64 @@ stable: no => because here we are swapping distant elements unlike bubble and in
 example: 1 3 3 2 2, and i = 1, we find the index of the minimum element = 2 (element = 2)
 we swap it with 3 at index 1, so the 3 at index 1 crosses the 3 at index 2
 
+
+///////////////////////////////////////////////////////////////////////
+
+COUNT SORT:
+
+algo:
+store count of all elements from left to right, convert count to prefix count
+now count actually has the position of the elements, how:
+we have count[x] this means element 'x' will lie in the array from position
+count[x-1]+1 to count[x]
+
+example: 1 1 1 3 3 3 
+count=[0,3,3,6]
+3 lies in positions from count[2]+1 to count[3] ie from 4 to 6
+
+now we will start to fill output array(we need to create and return seperate array) lets say we are at index 'i'
+we know the current count of v[i]=count[v[i]]=x, then index of v[i] is x-1
+so we can keep v[i] at index x-1 in the output array
+and we can reduce the count[v[i]] as we have used one
+
+time complexity: o(n+range of input), independent of distribution of data
+
+stability: depends on the implementation
+if we fill output from left to right, then it looses its stability
+if we fill from right to left, then its stable
+
+why: lets do more work to visualize
+lets say in the first step when we were storing count of each element
+we also create a map<int,vector<pii>> element
+so at each 'i' we do: count[v[i]]++; and element[v[i]].push_back({v[i],i});
+here we are using push_back which pushes at back
+
+convert count to prefix same as before and 
+
+now if we fill the output array from left to right and do:
+        int new_idx = count[v[i]]-1;
+        ans[new_idx] = element[v[i]].back().first
+        element[v[i]].pop_back();
+        count[v[i]]--;
+        
+you can see the element which was pushed last in the map got added to the array to a higher index than the element which was pushed first during making map
+
+in the order words we can say that if we fill from left to right, and consider
+the same element (ie elements with same value), lets says its has two occurences
+one at index 1 and other at index 5, we make count from left to right
+so count for index 1 will be increment before 5, but when we fill output 
+from left to right you decrement the count which was contributed by the
+occurence of that element at index 5 before the occurrence at index 1
+
+
 //////////////////////////////////////////////////////////////////////
 
-Merge sort – 
-Best, average and worst case time complexity: nlogn which is independent of distribution of data. 
-stable: yes => it could be made stable, rearrangement of elements takes place while merging so we need to make chngs there, while we put the elements into
-the big array, we select the minmum b/n the two there we have
+MERGE SORT:
+
+time complexity and stability: 
+best, worst and avg case time = o(n^2), which is independent of the distribution of data
+stable: yes => it could be made stable, rearrangement of elements takes place while merging so we need to make chngs there, 
+while we put the elements into the big array, we select the minimum b/n the two there we have
 
 so if(a[i]<=b[j]) {
     i think that :here we must use equality sign also, so that even if two  elements are equal
@@ -130,8 +201,8 @@ so if(a[i]<=b[j]) {
     
 }
  
-
-Several common sorting algorithms are stable by nature, such as Merge Sort, Timsort, Counting Sort, Insertion Sort, and Bubble Sort. Others such as Quicksort, Heapsort and Selection Sort are unstable.
+Several common sorting algorithms are stable by nature, such as Merge Sort, Timsort, Counting Sort, Insertion Sort, 
+and Bubble Sort. Others such as Quicksort, Heapsort and Selection Sort are unstable.
 
 
 bubble, insertion, count, merge sort -> stable
@@ -203,6 +274,36 @@ void insertion_sort(vector<int>& v) {
         j++;
         v[j] = who;
     }
+}
+
+///////////////////////////// count sort ///////////////////////////////
+
+vector<int> count_sort(vector<int> v) {
+    int n = v.size();
+    int maxi = 0;
+    for(auto x:v) {
+        maxi = max(maxi,x);
+    }
+    
+    int m = maxi+1;
+    vector<int> count(m);
+    for(auto x:v) {
+        count[x]++;
+    }
+    
+    for(int i=1; i<m; i++) {
+        count[i] += count[i-1];
+    }
+    
+    vector<int> ans(n);
+    // for stability right to left
+    for(int i=n-1; i>=0; i--) {
+        int new_idx = count[v[i]]-1;
+        ans[new_idx] = v[i];
+        count[v[i]]--;
+    }
+    
+    return ans;
 }
 
 
@@ -279,8 +380,6 @@ void quick_sort(vector<int>& v, int l, int r) {
     quick_sort(v, pvt_idx+1, r);
 }
 
-////////////////////////////////////////////////////////////////////////
-
 void print(vector<int>& v) {
     for(auto x: v) {
         cout << x << " ";
@@ -292,17 +391,17 @@ void print(vector<int>& v) {
 vector<int> getArray() {
     vector<int> v = {1,2,3,4,5};
     
-    // reverse(v.begin(),v.end());
-    
-    v = {7,8,3,1,2};
+    v = {7,8,3,1,2,11,1};
     
     return v;
 }
 
 void solve()
 {
-    int n=5;
     vector<int> v = getArray();
+    int n=v.size();
+    
+    v = getArray(); v = count_sort(v); print(v);
     
     v = getArray(); bubble_sort(v); print(v);
     
@@ -312,7 +411,6 @@ void solve()
     
     v = getArray(); quick_sort(v, 0, n-1); print(v);
     
-
     return;
 }
 
