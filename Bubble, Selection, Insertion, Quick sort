@@ -189,7 +189,7 @@ occurence of that element at index 5 before the occurrence at index 1
 MERGE SORT:
 
 time complexity and stability: 
-best, worst and avg case time = o(n^2), which is independent of the distribution of data
+best, worst and avg case time = o(nlogn), which is independent of the distribution of data
 stable: yes => it could be made stable, rearrangement of elements takes place while merging so we need to make chngs there, 
 while we put the elements into the big array, we select the minimum b/n the two there we have
 
