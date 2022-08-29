@@ -1,0 +1,123 @@
+import React, { createContext, useEffect, useState } from "react";
+
+// my modules
+import Navbar from "../components/Navbar.jsx";
+import SearchBar from "../components/Searchbar.jsx";
+import "../css/home.css";
+import NewsCard from "../components/NewsCard.jsx";
+import { vars, categoryDetails, countryDetails } from "../utilities/Vars.js";
+import PreferencesContext from "../utilities/PreferencesContext.js";
+
+const axios = require("axios").default;
+
+// String categoryURL = "https://newsapi.org/v2/top-headlines?country="+ country +"&category=" + category + "&apiKey=" + apiKey;
+
+const apiKey = "bc58b747903c4d41a57ff7472de0cb93";
+
+function generateURL(category, country) {
+  let URL = "https://newsapi.org/v2/top-headlines?country=" + country;
+  if (category !== "") {
+    URL += "&category=" + category;
+  }
+  URL += "&apiKey=" + apiKey;
+
+  return URL;
+}
+
+function Home() {
+  const [news, setNews] = useState([]);
+  const [preferences, setPreferences] = useState({
+    categoryKey: vars.defaultCategoryKey,
+    countryKey: localStorage.getItem("countryKey")
+      ? localStorage.getItem("countryKey")
+      : vars.defaultCountryKey,
+  });
+
+  // this function will used by descendants to manipulate context
+  async function changeCategoryKey(newKey) {
+    // setPreferences((prevValue) => {
+    //   // prevValue.categoryKey = newKey;
+
+    //   const newValue = prevValue;
+    //   newValue.categoryKey = newKey;
+    //   return newValue;
+    // });
+
+    setPreferences({ categoryKey: newKey, countryKey: preferences.countryKey });
+
+    console.log(preferences);
+
+    // getNews();
+  }
+
+  function changeCountryKey(newKey) {
+    localStorage.setItem("countryKey", newKey);
+    setPreferences({
+      categoryKey: preferences.categoryKey,
+      countryKey: newKey,
+    });
+  }
+
+  async function getNews() {
+    console.log("called");
+    try {
+      const response = await axios.get(
+        generateURL(
+          categoryDetails[preferences.categoryKey].code,
+          countryDetails[preferences.countryKey].code
+        )
+      );
+      // console.log(response.data.articles);
+      setNews(response.data.articles);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // wrap this inside use effect, so this code runs before mounting
+  useEffect(() => {
+    // function init() {
+    //   // set news, preferences etc
+    //   getNews();
+    // }
+    // init();
+    getNews();
+    console.log("effect called");
+  }, [preferences]);
+
+  const NewsComponent = (
+    <div className="news-div">
+      <div className="row">
+        {news.map((newsItem, index) => {
+          return (
+            <div className="col-4 news-item-div" key={index}>
+              <NewsCard newsItem={newsItem} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <PreferencesContext.Provider
+        value={{
+          categoryDetails: {
+            key: preferences.categoryKey,
+            change: changeCategoryKey,
+          },
+          countryDetails: {
+            key: preferences.countryKey,
+            change: changeCountryKey,
+          },
+        }}
+      >
+        <Navbar p={preferences} />
+        {NewsComponent}
+      </PreferencesContext.Provider>
+    </div>
+  );
+}
+
+export default Home;
