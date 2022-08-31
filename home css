@@ -1,0 +1,164 @@
+:root {
+  --ff1: "Montserrat";
+
+  --telegram-dark: #101d25;
+  --telegram-light: #232d36;
+
+  --telegram-dark: black;
+  --telegram-light: #232d36;
+
+  --dark: #292d36;
+  --light: #424242;
+  --yellow: #ffbb00;
+  --gradient: "#484848";
+
+  --dark-purple: #131022;
+  --light-purple: #7026b9;
+  --grey-purple: #232234;
+
+  --telegram-dark: black;
+  --telegram-light: var(--grey-purple);
+
+  /* --light-purple: #663399; */
+  /* --light-purple: var(--dark-purple); */
+
+  /* --light-purple: #642c9c; */
+
+  /* --light-purple: #230d38; */
+
+  /* --dark-purple: #181433; */
+  /* --light-purple: #353057; */
+
+  /* --light-purple: #383166; */
+
+  /* --light-purple: black; */
+  /* --dark-purple: #1a2448;
+      --light-purple: #05103a; */
+
+  /* --light-purple: #1a2448;
+      --dark-purple: #05103a; */
+
+  /* --dark-purple: #2d2a4a; */
+  /* --light-purple: #3f396c; */
+
+  --heading-font: "Montserrat";
+  --desc-font: "Montserrat";
+  --login-btn-fwt: 600;
+  --link-hover-color: var(--light-purple);
+  --light-button-hover-color: var(--dark-purple);
+  --login-btn-border-rad: 8px;
+  --contri-btn-border-rad: 14px;
+
+  --big-title-fsz: 3.5rem;
+  --title-fsz: 3rem;
+  --sub-title-fsz: 2.4rem;
+  --big-desc-fsz: 1.6rem;
+  --desc-fsz: 1rem;
+
+  --big-title-fwt: 700;
+  --title-fwt: 600;
+  --sub-title-fwt: 500;
+  --big-desc-fwt: 400;
+
+  --tab-big-title-fsz: 2.8rem;
+  --tab-title-fsz: 2.4rem;
+  --tab-sub-title-fsz: 1.8rem;
+  --tab-big-desc-fsz: 1.2rem;
+  --tab-feather-fsz: 1rem;
+  --tab-desc-fsz: 0.8rem;
+
+  --tab-big-title-fwt: 600;
+  --tab-title-fwt: 500;
+  --tab-sub-title-fwt: 400;
+  --tab-big-desc-fwt: 400;
+
+  --good-width: 80%;
+
+  --tab-good-width: 90%;
+
+  --nav_h: 10px;
+
+  --loader-div-width: 120px;
+
+  --nav-margin: 150px;
+  --tab-nav-margin: 120px;
+}
+
+body {
+  background-color: var(--dark);
+  background-color: black;
+}
+
+.news-div {
+  margin: 100px 5% 100px 5%;
+}
+
+.news-item-div {
+  /* border: 2px solid green; */
+  padding: 15px;
+  text-align: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.news-item-div:hover {
+  padding: 8px;
+  transition: 0.5s;
+}
+
+.loader-div {
+  margin: auto;
+  width: 80px;
+  margin-top: 240px;
+  text-align: center;
+  margin-bottom: 360px;
+}
+
+.nothing-text {
+  color: white;
+  font-family: "Montserrat";
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 240px;
+}
+
+/********************************************* mob and tab **********************************************/
+
+@media (max-width: 850px) and (min-width: 600px) {
+  .nothing-text {
+    margin-top: 280px;
+    font-size: 1.6rem;
+  }
+
+  .news-div {
+    margin: 160px 5% 100px 5%;
+  }
+
+  .loader-div {
+    margin-top: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .news-div {
+    margin: 100px 15px 100px 15px;
+  }
+
+  .news-item-div {
+    padding: 8px 15px 8px 15px;
+  }
+
+  .nothing-text {
+    margin-top: 360px;
+    font-size: 1.2rem;
+  }
+
+  .news-div {
+    margin: 140px 15px 100px 15px;
+  }
+
+  .loader-div {
+    margin-top: 360px;
+  }
+}
