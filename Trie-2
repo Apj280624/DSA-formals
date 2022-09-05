@@ -1,0 +1,218 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fastio()                      \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define lli long long int
+#define ll long long
+#define pii pair<int,int>
+#define pll pair<ll,ll>
+#define tpiii tuple<int,int,int>
+#define tplll tuple<ll,ll,ll>
+// DS
+#define vi vector<int>
+#define vb vector<bool>
+#define vl vector<ll>
+#define vvi vector<vi>
+#define vvl vector<vl> 
+#define umap unordered_map
+#define uset unordered_set
+#define mset multiset
+// Utilities
+#define ff first
+#define ss second
+#define bg begin()
+#define ed end()
+#define pb push_back
+#define ppb pop_back
+ll mod1=1e9+7;
+ll mod2=1e9+7;
+// Functions
+ll mod_add(ll x,ll y,ll m) { return ((x%m)+(y%m))%m; }
+ll mod_mul(ll x,ll y,ll m) { return ((x%m)*(y%m))%m; }
+
+class Node {
+    public:
+    vector<Node*> v;
+    int count, pref_count;
+    
+    Node() {
+        v.resize(26, NULL);
+        count = pref_count = 0;
+    }
+    
+    bool contains(char ch) {
+        return v[ch-'a'] != NULL;
+    }
+    
+    void put(char ch) {
+        v[ch-'a'] = new Node();
+    }
+    
+    Node* get_next(char ch) {
+        return v[ch-'a'];
+    }
+    
+    int get_count() {
+        return count;
+    }
+    
+    void inc_count() {
+        count++;
+    }
+    
+    void dec_count() {
+        count--;
+    }
+    
+    int get_pref_count() {
+        return pref_count;
+    }
+    
+    int inc_pref_count() {
+        pref_count++;
+    }
+    
+    void dec_pref_count() {
+        pref_count--;
+    }
+};
+
+class Trie {
+    public:
+    Node* root;
+    
+    Trie() {
+        root = new Node();
+    }
+    
+    void insert(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        // cout<<temp->get_pref_count()<<endl;
+        
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                temp -> put(s[i]);
+            }
+            
+            temp -> inc_pref_count();
+            temp = temp->get_next(s[i]);
+        }
+        
+        temp -> inc_count();
+        temp -> inc_pref_count();
+    }
+    
+    int count_words_equal_to(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                return 0;
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        return temp -> get_count();
+    }
+    
+    int count_words_starting_with(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                return 0;
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        return temp -> get_pref_count();
+    }
+    
+    bool search(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                return false;
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        return temp -> get_count() > 0;
+    }
+    
+    void erase(string s) {
+        if(s=="" || !search(s)) {
+            cout << "Trie doesnot contain" << ": " << s <<'\n';
+            return;
+        }
+        
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            temp -> dec_pref_count();
+            temp = temp->get_next(s[i]);
+        } 
+        
+        temp -> dec_count();
+        temp -> dec_pref_count();
+    }
+};
+
+void solve()
+{
+    Trie trie;
+    trie.insert("word");
+    trie.insert("word");
+    trie.insert("word");
+    
+    // cout<<trie.count_words_equal_to("word")<<endl;
+    // cout<<trie.count_words_equal_to("worde")<<endl;
+    
+    // cout<<"--------------------------"<<endl;
+    
+    // cout<<trie.count_words_starting_with("")<<endl;
+    // cout<<trie.count_words_starting_with("w")<<endl;
+    // cout<<trie.count_words_starting_with("wo")<<endl;
+    // cout<<trie.count_words_starting_with("wor")<<endl;
+    // cout<<trie.count_words_starting_with("word")<<endl;
+    // cout<<trie.count_words_starting_with("worde")<<endl;
+    // cout<<trie.count_words_starting_with("a")<<endl;
+    
+    // cout<<"--------------------------"<<endl;
+    
+    // trie.erase("");
+    // trie.erase("w");
+    // trie.erase("wo");
+    
+    // trie.erase("wor");
+    
+    cout<<trie.count_words_starting_with("word")<<endl;
+    trie.erase("word");
+    cout<<trie.count_words_starting_with("word")<<endl;
+    
+    // trie.erase("worde");
+    
+    return;
+}
+
+int main()
+{
+    fastio();
+    int t=1;
+    // cin>>t;
+    while(t--) solve();
+
+    return 0;
+}
