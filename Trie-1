@@ -1,0 +1,150 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fastio()                      \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+#define lli long long int
+#define ll long long
+#define pii pair<int,int>
+#define pll pair<ll,ll>
+#define tpiii tuple<int,int,int>
+#define tplll tuple<ll,ll,ll>
+// DS
+#define vi vector<int>
+#define vb vector<bool>
+#define vl vector<ll>
+#define vvi vector<vi>
+#define vvl vector<vl> 
+#define umap unordered_map
+#define uset unordered_set
+#define mset multiset
+// Utilities
+#define ff first
+#define ss second
+#define bg begin()
+#define ed end()
+#define pb push_back
+#define ppb pop_back
+ll mod1=1e9+7;
+ll mod2=1e9+7;
+// Functions
+ll mod_add(ll x,ll y,ll m) { return ((x%m)+(y%m))%m; }
+ll mod_mul(ll x,ll y,ll m) { return ((x%m)*(y%m))%m; }
+
+class Node {
+    public:
+    vector<Node*> v;
+    bool flag;
+    
+    Node() {
+        v.resize(26, NULL);
+        flag = false;
+    }
+    
+    bool contains(char ch) {
+        return v[ch-'a'] != NULL;
+    }
+    
+    void put(char ch) {
+        v[ch-'a'] = new Node();
+    }
+    
+    Node* get_next(char ch) {
+        return v[ch-'a'];
+    }
+    
+    bool is_flag_set() {
+        return flag;
+    }
+    
+    void set_flag() {
+        flag = true;
+    }
+};
+
+class Trie {
+    public:
+    Node* root;
+    
+    Trie() {
+        root = new Node();
+    }
+    
+    void insert(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                temp -> put(s[i]);
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        temp->set_flag();
+    }
+    
+    bool search(string s) {
+        int n = s.size();
+        
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                return false;
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        return temp -> is_flag_set();
+    }
+    
+    bool starts_with(string s) {
+        int n = s.size();
+        g
+        Node* temp = root;
+        for(int i=0; i<n; i++) {
+            if(!temp -> contains(s[i])) {
+                return false;
+            }
+            
+            temp = temp->get_next(s[i]);
+        }
+        
+        return true;
+    }
+};
+
+void solve()
+{
+    Trie trie;
+    trie.insert("word");
+    trie.insert("word");
+    trie.insert("word");
+    
+    cout<<trie.search("word")<<endl;
+    cout<<trie.search("worde")<<endl;
+    
+    cout<<"--------------------------"<<endl;
+    
+    
+    cout<<trie.starts_with("")<<endl;
+    cout<<trie.starts_with("w")<<endl;
+    cout<<trie.starts_with("wo")<<endl;
+    cout<<trie.starts_with("wor")<<endl;
+    cout<<trie.starts_with("word")<<endl;
+    
+    return;
+}
+
+int main()
+{
+    fastio();
+    int t=1;
+    // cin>>t;
+    while(t--) solve();
+
+    return 0;
+}
