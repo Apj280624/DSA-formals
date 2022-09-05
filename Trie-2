@@ -34,7 +34,7 @@ ll mod_mul(ll x,ll y,ll m) { return ((x%m)*(y%m))%m; }
 
 /*
 source: striver, codebeyond youtube
-he was wrong at some places 
+he was wrong at some places in Trie-2
 
 he didn't write temp -> inc_pref_count(); and temp -> dec_pref_count();
 at the end of for loop in insert and erase functions respectively
