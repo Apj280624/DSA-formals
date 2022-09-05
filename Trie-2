@@ -32,6 +32,15 @@ ll mod2=1e9+7;
 ll mod_add(ll x,ll y,ll m) { return ((x%m)+(y%m))%m; }
 ll mod_mul(ll x,ll y,ll m) { return ((x%m)*(y%m))%m; }
 
+/*
+source: striver, codebeyond youtube
+he was wrong at some places 
+
+he didn't write temp -> inc_pref_count(); and temp -> dec_pref_count();
+at the end of for loop in insert and erase functions respectively
+
+*/
+
 class Node {
     public:
     vector<Node*> v;
@@ -91,8 +100,6 @@ class Trie {
         int n = s.size();
         
         Node* temp = root;
-        // cout<<temp->get_pref_count()<<endl;
-        
         for(int i=0; i<n; i++) {
             if(!temp -> contains(s[i])) {
                 temp -> put(s[i]);
