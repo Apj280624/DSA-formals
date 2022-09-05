@@ -89,7 +89,7 @@ class Trie {
             temp = temp->get_next(s[i]);
         }
         
-        temp->set_flag();
+        temp -> set_flag();
     }
     
     bool search(string s) {
