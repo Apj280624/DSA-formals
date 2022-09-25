@@ -97,7 +97,7 @@ void solve()
 
         int cost = k*curr.dur;
         int discount = w*(t-curr.arr);
-        ans[curr.idx] = cost-discount;
+        ans[curr.idx] = max(0, cost-discount);
         
         t+=curr.dur;
     }
