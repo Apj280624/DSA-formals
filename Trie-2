@@ -39,6 +39,8 @@ he was wrong at some places in Trie-2
 he didn't write temp -> inc_pref_count(); and temp -> dec_pref_count();
 at the end of for loop in insert and erase functions respectively
 
+NOTE: here we considering count of empty strings also
+
 */
 
 class Node {
